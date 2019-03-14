@@ -13,7 +13,7 @@ if(! function_exists('aurl')){
 /**
  * Get site settings
  */
-if(('settings')){
+if(! function_exists('settings')){
     function settings($key = null){
 
         if(cache($cacheKey = 'settings') && cache('settings') != null){
@@ -28,5 +28,19 @@ if(('settings')){
         }
 
         return null;
+    }
+}
+
+/**
+ * Mark active link
+ */
+
+if(! function_exists('is_active_link')){
+    function is_active_link($segment = null){
+        $reqSegment = request()->segment(2);
+
+        if($reqSegment == null && $segment == null) return true;
+
+        return $reqSegment == $segment;
     }
 }
