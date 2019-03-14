@@ -12,6 +12,10 @@
                 <i class="fa fa-cog"></i>
                 Settings
             </a>
+            <a class="btn {{is_active_link('categories') ? 'btn-primary' : 'btn-light' }}" href="{{route('categories.index')}}">
+                <i class="fa fa-list"></i>
+                Categories
+            </a>
         </div>
     </div>
 </div>
