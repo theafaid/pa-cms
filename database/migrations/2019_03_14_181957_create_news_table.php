@@ -20,6 +20,8 @@ class CreateNewsTable extends Migration
             $table->string('main_photo');
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedInteger('creator_id')->nullable();
+            $table->foreign('creator_id')->references('id')->on('users')->onDelete('set null');
             $table->longText('body');
             $table->text('images')->nullable();
             $table->timestamps();
