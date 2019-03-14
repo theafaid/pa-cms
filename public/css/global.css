@@ -1,6 +1,9 @@
 /**
  - 1) Dashboard
+ - 2) Settings
 */
+
+/*********** Start of dashboard **************/
 
 .dashboard-stat{
     width: 49%;
@@ -34,3 +37,9 @@
     text-align: left;
     font-weight: bold;
 }
+/************* Start of settings ****************/
+.fifty-percent-width{
+    width: 50%;
+    display: inline;
+}
+

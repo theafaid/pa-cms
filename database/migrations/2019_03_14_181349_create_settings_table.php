@@ -19,7 +19,7 @@ class CreateSettingsTable extends Migration
             $table->string('site_email')->nullable();
             $table->string('site_keywords')->nullable();
             $table->string('site_description')->nullable();
-            $table->boolean('site_status')->default(true);
+            $table->boolean('site_open')->default(true);
             $table->string('site_maintenance_message')->nullable();
             $table->timestamps();
         });
