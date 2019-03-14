@@ -97,14 +97,12 @@ class CategoriesController extends Controller
             ->with('success', 'Category Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+//* Remove the specified resource from storage.
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('categories.index')
+            ->with('success', 'Category Has Deleted Successfully');
     }
 }
