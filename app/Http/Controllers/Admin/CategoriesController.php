@@ -52,37 +52,49 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Show a specified resource
+     * @param Category $category
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', [
+            'title' => "Show {$category->name}",
+            'category' => $category->load('creator'),
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', [
+            'title' => "Edit {$category->name}",
+            'category' => $category
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Category $category)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required|string|max:255|unique:categories,name,'.$category->id
+        ]);
+
+        $category->update([
+            'name' => $data['name'],
+            'slug' => $data['name']
+        ]);
+        return redirect()->route('categories.show', $category->fresh()->slug)
+            ->with('success', 'Category Updated Successfully');
     }
 
     /**
