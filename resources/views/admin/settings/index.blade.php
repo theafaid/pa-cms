@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <i class="fa fa-envelope"></i>
                         <strong>Site Name</strong>
-                        <input type="email" name="email" class="form-control" value="{{$settings['site_email'] ?? old('site_email')}}">
+                        <input type="email" name="site_email" class="form-control" value="{{$settings['site_email'] ?? old('site_email')}}">
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                 <div class="col-6">
                     <strong>Maintenance</strong>
                     <i class="fa fa-lock"></i>
-                    <select class="form-control">
+                    <select class="form-control" name="site_open">
                         <option value="1" @if($settings['site_open']) selected @endif>Enabled</option>
                         <option value="0" @if(! $settings['site_open']) selected @endif>Disabled</option>
                     </select>

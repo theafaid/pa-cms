@@ -19,9 +19,8 @@ if(('settings')){
         if(cache($cacheKey = 'settings') && cache('settings') != null){
             $settings = cache($cacheKey);
         }else{
-            $settings = cache()->rememberForever($cacheKey, function(){
-                return \App\Setting::first() ?: null;
-            });
+            $settings = \App\Setting::first();
+            \App\Setting::refreshCache($settings);
         }
 
         if(! is_null($settings)){

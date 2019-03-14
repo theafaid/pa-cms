@@ -81,6 +81,7 @@
                         @include('admin.layouts.partials.menu')
                     </div>
                     <div class="col-md-8">
+                        @include('admin.layouts.partials.messages')
                         @yield('content')
                     </div>
                 </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateSiteSettingsRequest;
+use App\Setting;
 
 class SettingsController extends Controller
 {
@@ -16,5 +18,16 @@ class SettingsController extends Controller
             'title' => "Settings",
             'settings' => settings()
         ]);
+    }
+
+    /**
+     * Update site settings
+     * @param UpdateSiteSettingsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function update(UpdateSiteSettingsRequest $request){
+        $settings = Setting::first();
+        return $request->update($settings);
     }
 }
