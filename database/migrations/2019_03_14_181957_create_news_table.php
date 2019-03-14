@@ -18,7 +18,7 @@ class CreateNewsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('main_photo');
-            $table->integer('category_id');
+            $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->longText('body');
             $table->text('images')->nullable();
