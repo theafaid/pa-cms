@@ -1,0 +1,36 @@
+/**
+ - 1) Dashboard
+*/
+
+.dashboard-stat{
+    width: 49%;
+    background: #f3f3f3;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.dashboard-stat i{
+    font-weight: bold;
+    font-size: 70px;
+}
+
+.dashboard-stat .count, .dashboard-stat .desc{
+    font-weight: bold;
+}
+
+.dashboard-stat .count{
+    margin-top: 5px;
+    display: block;
+    color: #f93e3e;
+    font-weight: bold;
+}
+
+.menu-links a{
+    width: 80%;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: bold;
+}
