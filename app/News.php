@@ -11,6 +11,14 @@ class News extends Model
     protected $guarded = [];
     protected $with = ['category'];
 
+    protected static function boot(){
+        parent::boot();
+
+        static::deleting(function($news){
+            static::removeFiles($news, true, true);
+        });
+    }
+
     use HasSlug;
 
     /**

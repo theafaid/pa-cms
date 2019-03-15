@@ -97,7 +97,12 @@ class CategoriesController extends Controller
             ->with('success', 'Category Updated Successfully');
     }
 
-//* Remove the specified resource from storage.
+    /**
+     * Remove the specified resource from storage.
+     * @param Category $category
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function destroy(Category $category)
     {
         $category->delete();
