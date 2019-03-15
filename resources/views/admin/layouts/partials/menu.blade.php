@@ -16,6 +16,10 @@
                 <i class="fa fa-list"></i>
                 Categories
             </a>
+            <a class="btn btn-danger" href="{{route('logout')}}">
+                <i class="fa fa-power-off"></i>
+                Logout
+            </a>
         </div>
     </div>
 </div>
