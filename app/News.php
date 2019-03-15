@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class News extends Model
 {
@@ -29,10 +30,17 @@ class News extends Model
     }
 
     /**
-     * @param $value
-     * @return string
+     * Remove news files from storage
+     * @param $news
      */
-    public function getMainPhotoAttribute($value){
-        return "/storage/{$value}";
+    public static function removeFiles($news){
+
+        Storage::delete($news->main_photo);
+
+        if($images = $news->images){
+            foreach(json_decode($images) as $img){
+                Storage::delete($img);
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
                     <div class="text-center">
-                        <img src="{{$news->main_photo}}">
+                        <img src="/storage/{{$news->main_photo}}">
                         <hr>
                     </div>
                     <p class="lead">{!! $news->body !!}</p>
@@ -26,7 +26,7 @@
                         <img src="/storage/{{$img}}" class="img-thumbnail img-fluid" style="display: inline"/>
                     </div>
                 @empty
-                    <div class="alert aler-warning">
+                    <div class="alert alert-warning">
                         This news has no Sub Images Uploaded!
                     </div>
                 @endforelse

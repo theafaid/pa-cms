@@ -19,7 +19,7 @@ class NewsController extends Controller
     {
         return view('admin.news.index', [
             'title' => 'News',
-            'news'  => News::paginate(),
+            'news'  => News::latest()->paginate(),
         ]);
     }
 
@@ -78,14 +78,20 @@ class NewsController extends Controller
         //
     }
 
+
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(News $news)
     {
-        //
+        News::removeFiles($news);
+
+        $news->delete();
+
+        return redirect()->route('news.index')
+            ->with('success', 'News has removed successfully');
     }
 }

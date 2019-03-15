@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-header">
             {{$title}}
-            <a href="{{route('categories.create')}}" class="btn btn-success float-right">
+            <a href="{{route('news.create')}}" class="btn btn-success float-right">
                 <i class="fa fa-plus"></i> New
             </a>
         </div>
