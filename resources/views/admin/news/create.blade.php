@@ -1,8 +1,4 @@
 @extends('admin.layouts.app')
-@push('css')
-    <link rel="stylesheet" href="{{asset('css/jquery-te-1.4.0.css')}}">
-@endpush
-
 @section('content')
 <div class="card">
     <div class="card-header">

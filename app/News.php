@@ -33,10 +33,39 @@ class News extends Model
      * Remove news files from storage
      * @param $news
      */
-    public static function removeFiles($news){
+    public static function removeFiles($news, $main = true, $others = true){
 
+        if($main && $others){
+
+            static::removeMain($news);
+            static::removeOthers($news);
+
+        }elseif($main && ! $others){
+
+           static::removeMain($news);
+
+        }elseif(! $main && $others){
+
+            static::removeOthers($news);
+
+        }else{
+            return;
+        }
+    }
+
+    /**
+     * Remove main image for a specific news
+     * @param $news
+     */
+    protected static function removeMain($news){
         Storage::delete($news->main_photo);
+    }
 
+    /**
+     * Remove sub images for a specific news
+     * @param $news
+     */
+    protected static function removeOthers($news){
         if($images = $news->images){
             foreach(json_decode($images) as $img){
                 Storage::delete($img);

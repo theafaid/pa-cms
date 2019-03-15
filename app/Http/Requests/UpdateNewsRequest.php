@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\News;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Http\FormRequest;
 use Intervention\Image\ImageManagerStatic;
+use Storage;
 
-class StoreNewsRequest extends FormRequest
+class UpdateNewsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,10 +28,10 @@ class StoreNewsRequest extends FormRequest
     {
         return [
             'title'       => 'required|string|max:255',
-            'main_photo'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'main_photo'  => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|numeric|exists:categories,id',
             'body'        => 'required|string',
-            'images.*'     => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'images.*'     => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
     }
 
@@ -39,15 +39,15 @@ class StoreNewsRequest extends FormRequest
      * Persist storing a news
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function persist(){
-        $news = News::create([
+    public function update($news){
+        $news->update([
             'creator_id' => auth()->id(),
             'title' => $this->title,
             'slug' => $this->title,
-            'main_photo' => $this->upload($this->main_photo),
+            'main_photo' => $this->main_photo ? $this->upload($this->main_photo, $news, 'main') : $news->main_photo,
             'category_id' => $this->category_id,
             'body' => $this->body,
-            'images' => $this->images ? $this->upload($this->images) : null
+            'images' => $this->images ? $this->upload($this->images, $news, 'others') : $news->images
         ]);
 
         return redirect()->route('news.show', $news->slug)
@@ -61,12 +61,13 @@ class StoreNewsRequest extends FormRequest
      * @param $images
      * @return mixed
      */
-    private function upload($images){
-
+    private function upload($images, $news){
 
         if(is_null($images)) return null;
 
-        if(is_array($images)){
+        News::removeFiles($news, $this->has('main_photo'), $this->has('images'));
+
+            if(is_array($images)){
             $pathes = [];
 
             foreach($images as $img){
@@ -76,7 +77,7 @@ class StoreNewsRequest extends FormRequest
             return json_encode($pathes);
         }
 
-       return $this->storeImage($images, 600, 600);
+        return $this->storeImage($images, 600, 600);
     }
 
     /**

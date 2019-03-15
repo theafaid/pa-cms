@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
 use App\Http\Requests\StoreNewsRequest;
-use App\News;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateNewsRequest;
 use App\Http\Controllers\Controller;
+use App\Category;
+use Storage;
+use App\News;
 
 class NewsController extends Controller
 {
@@ -43,8 +44,7 @@ class NewsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param $news
      * @return \Illuminate\Http\Response
      */
     public function show(News $news)
@@ -55,29 +55,32 @@ class NewsController extends Controller
         ]);
     }
 
+
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        return view('admin.news.edit', [
+            'title' => "Edit News",
+            'news'  => $news,
+            'categories' => Category::all()
+        ]);
     }
+
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @param UpdateNewsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(News $news, UpdateNewsRequest $request)
     {
-        //
+        return $request->update($news);
     }
-
 
     /**
      * Remove the specified resource from storage.

@@ -17,7 +17,7 @@ trait HasSlug{
      * @param $title
      */
     public function setSlugAttribute($title){
-        if(static::whereSlug($slug = Str::slug($title))->exists()){
+        if(static::whereSlug($slug = Str::slug($title))->where('id', '!=', $this->id)->exists()){
             $slug = $slug ."_". time();
         }
         $this->attributes['slug'] = $slug;
