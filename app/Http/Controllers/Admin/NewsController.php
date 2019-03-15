@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Requests\StoreNewsRequest;
+use App\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -43,9 +44,12 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(News $news)
     {
-        //
+        return view('admin.news.show', [
+            'title' => "Show {$news->title}",
+            'news'  => $news->load('creator', 'category'),
+        ]);
     }
 
     /**

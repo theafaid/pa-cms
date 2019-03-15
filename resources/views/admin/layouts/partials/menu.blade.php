@@ -16,6 +16,10 @@
                 <i class="fa fa-list"></i>
                 Categories
             </a>
+            <a class="btn {{is_active_link('news') ? 'btn-primary' : 'btn-light' }}" href="{{route('news.index')}}">
+                <i class="fa fa-newspaper-o"></i>
+                news
+            </a>
             <a class="btn btn-danger" href="{{route('logout')}}">
                 <i class="fa fa-power-off"></i>
                 Logout
