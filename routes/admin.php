@@ -18,5 +18,7 @@ Route::group(['namespace' => 'Admin'], function(){
         Route::patch('/settings', 'SettingsController@update')->name('settings.update');
         // Categories Resource
         Route::resource('/categories', 'CategoriesController');
+        // News Resource
+        Route::resource('/news', 'NewsController');
     });
 });

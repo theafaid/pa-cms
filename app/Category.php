@@ -9,22 +9,7 @@ class Category extends Model
 {
     protected $guarded = [];
 
-    public function getRouteKeyName()
-    {
-        return "slug";
-    }
-
-    /**
-     * Validate the slug attribute for the cateogry
-     * it should be unique
-     * @param $title
-     */
-    public function setSlugAttribute($title){
-        if(static::whereSlug($slug = Str::slug($title))->exists()){
-            $slug = $slug . time();
-        }
-        $this->attributes['slug'] = $slug;
-    }
+    use HasSlug;
 
     /**
      * Get the creator of the category

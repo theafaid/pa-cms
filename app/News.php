@@ -8,4 +8,7 @@ class News extends Model
 {
     protected $table = 'news';
     protected $guarded = [];
+
+    use HasSlug;
+
 }
