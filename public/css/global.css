@@ -1,6 +1,6 @@
 /**
  - 1) Dashboard
- - 2) Settings
+ - 2) News
 */
 
 /*********** Start of dashboard **************/
@@ -37,9 +37,10 @@
     text-align: left;
     font-weight: bold;
 }
-/************* Start of settings ****************/
-.fifty-percent-width{
-    width: 50%;
-    display: inline;
+/************* Start of news ****************/
+
+.table-4-columns tr td{
+    width: 25%;
 }
+
 
