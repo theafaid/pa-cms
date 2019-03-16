@@ -20,7 +20,7 @@
                 <i class="fa fa-newspaper-o"></i>
                 news
             </a>
-            <a class="btn btn-danger" href="{{route('logout')}}">
+            <a class="btn btn-outline-danger" href="{{route('logout')}}">
                 <i class="fa fa-power-off"></i>
                 Logout
             </a>

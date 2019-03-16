@@ -40,6 +40,7 @@
                     </div>
                 </div>
                 <div class="col-12">
+                    <strong>Sub Images</strong>
                     <div class="form-group">
                         <input type="file" class="form-control" name="images[]" accept="image/*" multiple>
                     </div>

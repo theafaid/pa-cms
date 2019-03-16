@@ -11,7 +11,7 @@ class CmsInstall extends Command
      *
      * @var string
      */
-    protected $signature = 'cms:install';
+    protected $signature = 'cms:install {--force : Force install without confirmation}';
 
     /**
      * The console command description.
@@ -37,9 +37,27 @@ class CmsInstall extends Command
      */
     public function handle()
     {
-
-        if($this->ask('Are you sure to flush database and reinstall CMS ?')){
-            $this->call('db:seed');
+        if($this->option('force')){
+            $this->proceed();
+        }else{
+            if($this->confirm('Are you sure to delete all current data and install the default one ?'))
+            {
+                $this->proceed();
+            }
         }
+    }
+
+    protected function proceed(){
+        // storage link
+        $this->callSilent('storage:link');
+        $this->call('migrate:fresh',[
+            '--force' => true
+        ]);
+
+        $this->call('db:seed', [
+            '--force' => true
+        ]);
+
+        $this->info('Installed Successfully');
     }
 }

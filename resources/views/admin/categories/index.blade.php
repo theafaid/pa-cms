@@ -18,7 +18,7 @@
                </thead>
                @foreach($categories as $category)
                    <tr>
-                       <td>{{$category->name}}</td>
+                       <td style="width: 70%">{{$category->name}}</td>
                        <td>
                            <a href="{{route('categories.show', $category->slug)}}" class="btn btn-success">
                                <i class="fa fa-eye"></i>
